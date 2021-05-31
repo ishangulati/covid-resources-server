@@ -64,6 +64,7 @@ export enum Therapy {
 }
 
 export enum BloodGroup {
+  AnyGroup = "Any Group",
   APOS = "A+",
   ANEG = "A-",
   BPOS = "B+",
