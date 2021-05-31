@@ -1,0 +1,578 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "",
+    "version": "1.0.0",
+    "title": "Covid Resources Server",
+    "contact": {
+      "email": "ishangulati22@gmail.com"
+    }
+  },
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "contact",
+      "description": "Covid Resources Contacts",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "tel://+91-8882017923"
+      }
+    }
+  ],
+  "schemes": ["https", "http"],
+  "definitions": {
+    "Type": {
+      "type": "string",
+      "enum": ["availability", "requirement"]
+    },
+    "Medicince": {
+      "type": "string",
+      "enum": [
+        "Covid Medicines",
+        "Liposomal Amphotericin B",
+        "Tocilizumab",
+        "Baricitinib Olumiant",
+        "Fabiflu",
+        "Favipivavir",
+        "Xarelto",
+        "Sodium Lactate",
+        "Sodium Chloride",
+        "Doxycycline",
+        "Pantoprazole",
+        "Anidulafungin",
+        "Meropenem",
+        "Deflazacort",
+        "Zinc",
+        "Azithromycin",
+        "Bevacuzimab",
+        "Enoxaparin",
+        "Posatral",
+        "Medrol",
+        "Remdesivir"
+      ]
+    },
+    "Food": {
+      "type": "string",
+      "enum": ["Food", "Dry Ration"]
+    },
+    "Ambulance": {
+      "type": "string",
+      "enum": ["Ambulance"]
+    },
+    "Oxygen": {
+      "type": "string",
+      "enum": [
+        "Oxygen Cans",
+        "Oxygen Cylinders",
+        "Oxygen Concentrators",
+        "Oxygen Refill",
+        "Oxygen Regulator",
+        "Oximeter",
+        "Respirometer"
+      ]
+    },
+    "Bed": {
+      "type": "string",
+      "enum": ["Home ICU", "Oxygen Beds", "ICU Beds", "Ventilators"]
+    },
+    "Therapy": {
+      "type": "string",
+      "enum": ["ECMO", "Plasma"]
+    },
+    "BloodGroup": {
+      "type": "string",
+      "enum": ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"]
+    },
+    "ListingContact": {
+      "properties": {
+        "contactuid": {
+          "type": "string"
+        },
+        "leads": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Lead"
+          }
+        },
+        "verifiedviaportalinfo": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "string"
+        }
+      },
+      "required": ["leads", "contactuid"],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseContact"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "ExtractedContact": {
+      "type": "object",
+      "required": ["contact", "timestamp", "senderId", "source"],
+      "properties": {
+        "contact": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "debug": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        },
+        "senderId": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "number",
+          "example": 1622388490
+        },
+        "blobfilename": {
+          "type": "string"
+        },
+        "filename": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseContact"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "BaseContact": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["availability", "requirement"]
+        },
+        "location": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "name": {
+          "type": "string",
+          "example": "xyz ngo"
+        },
+        "verified": {
+          "type": "string",
+          "example": "15 May, 21 at 4:30pm"
+        },
+        "bloodgroup": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": {
+              "type": "string",
+              "enum": ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"]
+            }
+          }
+        },
+        "medicine": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": {
+              "type": "string",
+              "enum": [
+                "Covid Medicines",
+                "Liposomal Amphotericin B",
+                "Tocilizumab",
+                "Baricitinib Olumiant",
+                "Fabiflu",
+                "Favipivavir",
+                "Xarelto",
+                "Sodium Lactate",
+                "Sodium Chloride",
+                "Doxycycline",
+                "Pantoprazole",
+                "Anidulafungin",
+                "Meropenem",
+                "Deflazacort",
+                "Zinc",
+                "Azithromycin",
+                "Bevacuzimab",
+                "Enoxaparin",
+                "Posatral",
+                "Medrol",
+                "Remdesivir"
+              ]
+            }
+          }
+        },
+        "food": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": {
+              "type": "string",
+              "enum": ["Food", "Dry Ration"]
+            }
+          }
+        },
+        "ambulance": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": {
+              "type": "string",
+              "enum": ["Ambulance"]
+            }
+          }
+        },
+        "oxygen": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": {
+              "type": "string",
+              "enum": [
+                "Oxygen Cans",
+                "Oxygen Cylinders",
+                "Oxygen Concentrators",
+                "Oxygen Refill",
+                "Oxygen Regulator",
+                "Oximeter",
+                "Respirometer"
+              ]
+            }
+          }
+        },
+        "bed": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": {
+              "type": "string",
+              "enum": ["Home ICU", "Oxygen Beds", "ICU Beds", "Ventilators"]
+            }
+          }
+        },
+        "therapy": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": {
+              "type": "string",
+              "enum": ["ECMO", "Plasma"]
+            }
+          }
+        }
+      }
+    },
+    "Lead": {
+      "type": "object",
+      "required": ["leaduid", "sender", "source"],
+      "properties": {
+        "leaduid": {
+          "type": "string"
+        },
+        "sender": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string",
+          "enum": ["whatsapp", "twitter"]
+        },
+        "link": {
+          "type": "string"
+        },
+        "rawdata": {
+          "type": "string"
+        }
+      },
+      "example": {
+        "leaduid": "EDJS233",
+        "sender": "123@whatsapp.us",
+        "source": "whatsapp"
+      }
+    }
+  },
+  "paths": {
+    "/contact": {
+      "post": {
+        "tags": ["contact"],
+        "summary": "Add a new resource contact to the list",
+        "description": "",
+        "operationId": "addContact",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "secret-key",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Extracted contact that needs to be added to the listing",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ListingContact"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ListingContact"
+            }
+          }
+        },
+        "x-swagger-router-controller": "Contact"
+      }
+    },
+    "/extractedcontact": {
+      "post": {
+        "tags": ["contact"],
+        "summary": "Add a new resource contact to the list using automated flow",
+        "description": "",
+        "operationId": "addExtractedContact",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "secret-key",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Extracted contact that needs to be added to the listing",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExtractedContact"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ListingContact"
+              }
+            }
+          }
+        },
+        "x-swagger-router-controller": "Contact"
+      }
+    },
+    "/contacts": {
+      "get": {
+        "tags": ["contact"],
+        "summary": "Finds Resource Contacts by Type",
+        "description": "Multiple resouce values can be provided with comma separated strings",
+        "operationId": "findContactsByResource",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "description": "If looking for availability or requirement of resources",
+            "required": false,
+            "type": "array",
+            "items": {
+              "enum": ["availability", "requirement"]
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "bloodgroup",
+            "in": "query",
+            "description": "BloodGroup",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"]
+            },
+            "collectionFormat": "multi"
+          },
+
+          {
+            "name": "medicine",
+            "in": "query",
+            "description": "Medicines",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "Covid Medicines",
+                "Liposomal Amphotericin B",
+                "Tocilizumab",
+                "Baricitinib Olumiant",
+                "Fabiflu",
+                "Favipivavir",
+                "Xarelto",
+                "Sodium Lactate",
+                "Sodium Chloride",
+                "Doxycycline",
+                "Pantoprazole",
+                "Anidulafungin",
+                "Meropenem",
+                "Deflazacort",
+                "Zinc",
+                "Azithromycin",
+                "Bevacuzimab",
+                "Enoxaparin",
+                "Posatral",
+                "Medrol",
+                "Remdesivir"
+              ]
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "oxygen",
+            "in": "query",
+            "description": "Oxygen Supply Type",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "Oxygen Cans",
+                "Oxygen Cylinders",
+                "Oxygen Concentrators",
+                "Oxygen Refill",
+                "Oxygen Regulator",
+                "Oximeter",
+                "Respirometer"
+              ]
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "bed",
+            "in": "query",
+            "description": "Bed",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["Home ICU", "Oxygen Beds", "ICU Beds", "Ventilators"]
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "therapy",
+            "in": "query",
+            "description": "Therapy or Treatment",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["ECMO", "Plasma"]
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "food",
+            "in": "query",
+            "description": "Meal type",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["Food", "Dry Ration"]
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "ambulance",
+            "in": "query",
+            "description": "Ambulance",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["Ambulance"]
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "count",
+            "in": "query",
+            "description": "count of results to fetch",
+            "required": false,
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ListingContact"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid resoucetype value"
+          }
+        },
+        "x-swagger-router-controller": "Contact"
+      }
+    },
+    "/contacts/{contactuid}": {
+      "get": {
+        "tags": ["contact"],
+        "summary": "Find resouce details by contactuid",
+        "description": "Returns a resource information",
+        "operationId": "getResourceByContact",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "contactuid",
+            "in": "path",
+            "description": "Contact number of resource to return",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ListingContact"
+            }
+          },
+          "400": {
+            "description": "Invalid contact supplied"
+          },
+          "404": {
+            "description": "Resource not found"
+          }
+        },
+        "x-swagger-router-controller": "Contact"
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find Covid Resources",
+    "url": "http://swagger.io"
+  }
+}
