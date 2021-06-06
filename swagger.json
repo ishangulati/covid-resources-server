@@ -538,6 +538,13 @@
             "description": "count of results to fetch",
             "required": false,
             "type": "number"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "skip first offset results",
+            "required": false,
+            "type": "number"
           }
         ],
         "responses": {
