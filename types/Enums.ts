@@ -74,3 +74,7 @@ export enum BloodGroup {
   OPOS = "O+",
   ONEG = "O-",
 }
+
+export enum Vaccine {
+  
+}

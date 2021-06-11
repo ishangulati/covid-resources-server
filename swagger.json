@@ -83,6 +83,17 @@
       "type": "string",
       "enum": ["Any Group", "A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"]
     },
+    "Vaccine": {
+      "type": "string",
+      "enum": [
+        "Covishield",
+        "Covaxin",
+        "Moderna",
+        "Pfizer",
+        "Sputnik",
+        "Johnson & Johnson"
+      ]
+    },
     "ListingContact": {
       "properties": {
         "contactuid": {
@@ -188,6 +199,23 @@
                 "AB-",
                 "O+",
                 "O-"
+              ]
+            }
+          }
+        },
+        "vaccine": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": {
+              "type": "string",
+              "enum": [
+                "Covishield",
+                "Covaxin",
+                "Moderna",
+                "Pfizer",
+                "Sputnik",
+                "Johnson & Johnson"
               ]
             }
           }
@@ -429,7 +457,25 @@
             },
             "collectionFormat": "multi"
           },
-
+          {
+            "name": "vaccine",
+            "in": "query",
+            "description": "Vaccine",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "Covishield",
+                "Covaxin",
+                "Moderna",
+                "Pfizer",
+                "Sputnik",
+                "Johnson & Johnson"
+              ]
+            },
+            "collectionFormat": "multi"
+          },
           {
             "name": "medicine",
             "in": "query",

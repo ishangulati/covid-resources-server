@@ -8,6 +8,7 @@ import {
   Source,
   Type,
   BloodGroup,
+  Vaccine,
 } from "./Enums";
 
 export interface IExtractedArrays {
@@ -19,6 +20,7 @@ export interface IExtractedArrays {
   bed?: Bed[];
   therapy?: Therapy[];
   bloodgroup?: BloodGroup[];
+  vaccine?: Vaccine[];
 }
 export interface IInternalListingContact extends IContactMetaData {
   contactuid: string;

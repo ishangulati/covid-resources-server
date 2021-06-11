@@ -21,6 +21,7 @@ interface IListingContactModel extends IInternalListingContact {
   beds: string | null;
   therapies: string | null;
   bloodgroups: string | null;
+  vaccines: string | null;
 }
 
 @Table
@@ -133,6 +134,14 @@ export class Contact extends Model<IListingContactModel, IListingContact> {
   }
   set therapy(value: string[]) {
     setter(this, "therapies", value);
+  }
+
+  @Column({ type: DataType.VIRTUAL })
+  get vaccine(): string[] {
+    return getter(this, "vaccines");
+  }
+  set vaccine(value: string[]) {
+    setter(this, "vaccines", value);
   }
 }
 

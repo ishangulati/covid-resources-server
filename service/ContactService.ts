@@ -118,6 +118,9 @@ export function addExtractedContact(
                 dbContact.bloodgroup = dbContact.bloodgroup.concat(
                   createAttributes.bloodgroup || []
                 );
+                dbContact.vaccine = dbContact.vaccine.concat(
+                  createAttributes.vaccine || []
+                );
                 //update freshness, handling null case
                 if (!(dbContact.lastShared > dbLead.originTimestamp)) {
                   dbContact.lastShared = dbLead.originTimestamp;
@@ -157,7 +160,7 @@ export async function findContactsByResource(
 ): Promise<{ rows: Contact[]; count: number }> {
   const count = filterBody.count ? Math.min(filterBody.count, 100) : 10;
   const offset: number = +(filterBody.offset || 0);
-  const { medicine, oxygen, bed, therapy, food, ambulance, bloodgroup } =
+  const { medicine, oxygen, bed, therapy, food, ambulance, bloodgroup, vaccine } =
     filterBody;
   try {
     const where = {};
@@ -169,6 +172,7 @@ export async function findContactsByResource(
     addToFilterObject("foods", food, where);
     addToFilterObject("ambulances", ambulance, where);
     addToFilterObject("bloodgroups", bloodgroup, where);
+    addToFilterObject("vaccines", vaccine, where);
 
     return Contact.findAndCountAll({
       where,
