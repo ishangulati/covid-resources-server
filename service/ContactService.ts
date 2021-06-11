@@ -58,7 +58,7 @@ export function addExtractedContact(
             const {
               source,
               senderId,
-              blobfilename,
+              link,
               filename,
               timestamp,
               debug,

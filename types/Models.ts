@@ -41,7 +41,7 @@ interface IContactMetaData {
 export interface ILeadMetaData {
   source: Source;
   senderId: string;
-  blobfilename?: string;
+  link?: string;
   filename: string;
   debug?: string;
   timestamp: number;

@@ -134,7 +134,7 @@
           "type": "number",
           "example": 1622388490
         },
-        "blobfilename": {
+        "link": {
           "type": "string"
         },
         "filename": {

@@ -10,7 +10,7 @@ export function getLeadModel(extractedContact: ILeadMetaData): ILead {
     leaduid: extractedContact.filename,
     sender: extractedContact.senderId,
     source: extractedContact.source,
-    link: extractedContact.blobfilename,
+    link: extractedContact.link,
     rawdata: extractedContact.debug,
     originTimestamp: extractedContact.timestamp * 1000,
   };
