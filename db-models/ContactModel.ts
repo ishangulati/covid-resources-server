@@ -136,6 +136,9 @@ export class Contact extends Model<IListingContactModel, IListingContact> {
     setter(this, "therapies", value);
   }
 
+  @Column
+  vaccines: string;
+
   @Column({ type: DataType.VIRTUAL })
   get vaccine(): string[] {
     return getter(this, "vaccines");
