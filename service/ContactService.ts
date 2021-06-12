@@ -13,7 +13,7 @@ import { getLeadModel } from "./ServiceUtils";
 
 interface IFilter extends IExtractedArrays {
   count?: number;
-  offset?: string;
+  page?: string;
   type?: Type[];
 }
 
@@ -159,9 +159,18 @@ export async function findContactsByResource(
   filterBody: IFilter
 ): Promise<{ rows: Contact[]; count: number }> {
   const count = filterBody.count ? Math.min(filterBody.count, 100) : 10;
-  const offset: number = +(filterBody.offset || 0);
-  const { medicine, oxygen, bed, therapy, food, ambulance, bloodgroup, vaccine } =
-    filterBody;
+  const offset: number = +(filterBody.page || 0) * count;
+  const {
+    medicine,
+    oxygen,
+    bed,
+    therapy,
+    food,
+    ambulance,
+    bloodgroup,
+    vaccine,
+    location
+  } = filterBody;
   try {
     const where = {};
     addToFilterObject("type", filterBody.type, where);
@@ -173,6 +182,7 @@ export async function findContactsByResource(
     addToFilterObject("ambulances", ambulance, where);
     addToFilterObject("bloodgroups", bloodgroup, where);
     addToFilterObject("vaccines", vaccine, where);
+    addToFilterObject("locations", location, where);
 
     return Contact.findAndCountAll({
       where,
